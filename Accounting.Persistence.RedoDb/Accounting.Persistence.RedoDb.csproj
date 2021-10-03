@@ -2,16 +2,16 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Accounting.Application.Domain\Accounting.Application.Domain.csproj" />
       <ProjectReference Include="..\Accounting.Persistence\Accounting.Persistence.csproj" />
       <ProjectReference Include="..\BoCode.RedoDB\BoCode.RedoDB.DependencyInjection\BoCode.RedoDB.DependencyInjection.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AutoMapper" Version="10.1.1" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-rc.1.21451.13" />
     </ItemGroup>
 

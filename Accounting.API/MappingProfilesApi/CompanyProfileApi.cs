@@ -1,11 +1,12 @@
 using Accounting.Application.Domain.Company;
 using Accounting.ViewModels;
 using AutoMapper;
-namespace Accounting.MappingProfilesApi
+
+namespace Accounting.API.MappingProfilesApi
 {
-    public class CreateCompanyProfile : Profile
+    public class CompanyProfileApi : Profile
     {
-        public CreateCompanyProfile()
+        public CompanyProfileApi()
         {
             CreateMap<CreateCompanyViewModel, CreateCompanyDto>();
 

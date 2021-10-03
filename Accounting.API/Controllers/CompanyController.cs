@@ -1,5 +1,6 @@
 using System;
 using Accounting.API.Common;
+using Accounting.Application;
 using Accounting.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Accounting.Application.Domain.Company;
@@ -12,10 +13,12 @@ namespace Accounting.Controllers
     public class CompanyController : ControllerBase
     {
         private readonly IMapper _mapper;
+        private readonly ICompanyService _companyService;
 
-        public CompanyController(IMapper mapper)
+        public CompanyController(IMapper mapper, ICompanyService companyService)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _companyService = companyService ?? throw new ArgumentNullException(nameof(companyService));
         }
         
         [HttpPost]
@@ -24,7 +27,9 @@ namespace Accounting.Controllers
         {
 
             var createCompanyDto = _mapper.Map<CreateCompanyDto>(createCompanyViewModel);
-            return BadRequest();
+
+            var createdCompany = _companyService.CreateNewCompany(createCompanyDto);
+            return Ok(createdCompany);
         }
     }
 }

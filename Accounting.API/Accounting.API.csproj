@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>Accounting</RootNamespace>
     </PropertyGroup>
 
@@ -15,6 +15,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Accounting.API.Common\Accounting.API.Common.csproj" />
       <ProjectReference Include="..\Accounting.Application\Accounting.Application.csproj" />
+      <ProjectReference Include="..\Accounting.Persistence.RedoDb\Accounting.Persistence.RedoDb.csproj" />
     </ItemGroup>
 
 </Project>

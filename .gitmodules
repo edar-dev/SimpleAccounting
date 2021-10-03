@@ -1,0 +1,3 @@
+[submodule "BoCode.RedoDB"]
+	path = BoCode.RedoDB
+	url = https://github.com/riccardochirra/BoCode.RedoDB.git
