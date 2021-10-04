@@ -4,6 +4,6 @@ namespace Accounting.Application
 {
     public interface ICompanyService
     {
-        CompanyDto CreateNewCompany(CreateCompanyDto createCompanyDto);
+        CompanyDto Create(CreateCompanyDto createCompanyDto);
     }
 }

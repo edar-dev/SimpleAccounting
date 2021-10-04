@@ -23,12 +23,12 @@ namespace Accounting.Controllers
         
         [HttpPost]
         [RateLimitDecorator(StrategyType = StrategyTypeEnum.IpAddress)]
-        public ActionResult<CompanyDto> CreateCompany(CreateCompanyViewModel createCompanyViewModel)
+        public ActionResult<CompanyDto> Create(CreateCompanyViewModel createCompanyViewModel)
         {
 
             var createCompanyDto = _mapper.Map<CreateCompanyDto>(createCompanyViewModel);
 
-            var createdCompany = _companyService.CreateNewCompany(createCompanyDto);
+            var createdCompany = _companyService.Create(createCompanyDto);
             return Ok(createdCompany);
         }
     }

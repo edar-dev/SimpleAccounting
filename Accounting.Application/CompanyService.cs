@@ -17,7 +17,7 @@ namespace Accounting.Application
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public CompanyDto CreateNewCompany(CreateCompanyDto createCompanyDto)
+        public CompanyDto Create(CreateCompanyDto createCompanyDto)
         {
             var companyToCreate = _mapper.Map<Company>(createCompanyDto);
             var company = _companyRepository.Create(companyToCreate);
