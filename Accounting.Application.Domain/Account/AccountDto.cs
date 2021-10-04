@@ -23,12 +23,6 @@ namespace Accounting.Application.Domain.Account
 
         public AccountDto? ParentAccount { get; set; }
 
-        public string FullNumber
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
+        public string FullNumber => ParentAccount is not null ? string.Concat(ParentAccount.FullNumber, ".", Number) : Number.ToString();
     }
 }
