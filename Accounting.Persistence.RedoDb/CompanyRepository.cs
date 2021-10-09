@@ -6,7 +6,7 @@ namespace Accounting.Persistence.RedoDb
 {
     public class CompanyRepository : ICompanyRepository, IDependsOnRedoableGuid
     {
-        private ICollection<Company> _companies = new List<Company>();
+        private readonly ICollection<Company> _companies = new List<Company>();
         private IRedoableGuid _redoableGuid;
 
         public Company Create(Company company)

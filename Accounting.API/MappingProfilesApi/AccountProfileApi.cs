@@ -1,5 +1,5 @@
+using Accounting.API.ViewModels;
 using Accounting.Application.Domain.Account;
-using Accounting.ViewModels;
 using AutoMapper;
 
 namespace Accounting.API.MappingProfilesApi

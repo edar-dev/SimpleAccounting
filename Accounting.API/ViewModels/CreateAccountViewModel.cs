@@ -1,7 +1,7 @@
 using System;
 using Accounting.Application.Domain.Account;
 
-namespace Accounting.ViewModels
+namespace Accounting.API.ViewModels
 {
     public class CreateAccountViewModel
     {

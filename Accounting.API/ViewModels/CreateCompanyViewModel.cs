@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Accounting.ViewModels
+namespace Accounting.API.ViewModels
 {
     public class CreateCompanyViewModel
     {

@@ -1,12 +1,12 @@
 using System;
 using Accounting.API.Common;
+using Accounting.API.ViewModels;
 using Accounting.Application;
-using Accounting.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Accounting.Application.Domain.Company;
 using AutoMapper;
 
-namespace Accounting.Controllers
+namespace Accounting.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
