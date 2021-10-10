@@ -1,6 +1,6 @@
 namespace Accounting.Application.Domain.Company
 {
-    public class CompanyDto : DTOBase
+    public class CompanyDto : DtoBase
     {
         public string Name { get; set; }
     }

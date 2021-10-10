@@ -18,9 +18,11 @@ namespace Accounting.Application.Tests.Account
         {
             RedoDBEngineBuilder<AccountRepository, IAccountRepository> accountRepositoryBuilder = new();
             accountRepositoryBuilder.WithNoPersistence();
+            RedoDBEngineBuilder<AccountTemplateRepository, IAccountTemplateRepository> accountTemplateRepositoryBuilder = new();
+            accountTemplateRepositoryBuilder.WithNoPersistence();
             var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile<AccountProfileApplication>());
             IMapper mapper = new Mapper(mapperConfig);
-            _accountService = new AccountService(accountRepositoryBuilder.Build(), mapper);
+            _accountService = new AccountService(accountRepositoryBuilder.Build(),accountTemplateRepositoryBuilder.Build(), mapper);
         }
 
         [Fact]
@@ -39,7 +41,7 @@ namespace Accounting.Application.Tests.Account
             accountDto.FullNumber.Should().Be("1");
             accountDto.Type.Should().Be(AccountType.Debit);
             accountDto.ParentAccountId.Should().BeNull();
-            accountDto.ParentAccount.Should().BeNull();
+            accountDto.ParentParentAccount.Should().BeNull();
         }
         
         [Fact]
@@ -61,8 +63,8 @@ namespace Accounting.Application.Tests.Account
             childaccountDto.FullNumber.Should().Be("1.0");
             childaccountDto.Type.Should().Be(AccountType.Debit);
             childaccountDto.ParentAccountId.Should().Be(rootaccountDto.Id);
-            childaccountDto.ParentAccount.Should().NotBeNull();
-            childaccountDto.ParentAccount?.Id.Should().Be(rootaccountDto.Id);
+            childaccountDto.ParentParentAccount.Should().NotBeNull();
+            childaccountDto.ParentParentAccount?.Id.Should().Be(rootaccountDto.Id);
         }
     }
 }

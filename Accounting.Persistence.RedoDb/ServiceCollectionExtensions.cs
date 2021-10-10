@@ -9,6 +9,7 @@ namespace Accounting.Persistence.RedoDb
         {
             services.AddRedoDB<ICompanyRepository, CompanyRepository>(ServiceLifetime.Singleton,(redo) => redo.WithJsonAdapters("d://data//company").Build());
             services.AddRedoDB<IAccountRepository, AccountRepository>(ServiceLifetime.Singleton,(redo) => redo.WithJsonAdapters("d://data//account").Build());
+            services.AddRedoDB<IAccountTemplateRepository, AccountTemplateRepository>(ServiceLifetime.Singleton,(redo) => redo.WithJsonAdapters("d://data//accountTemplate").Build());
         }
     }
 }

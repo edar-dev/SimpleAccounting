@@ -2,8 +2,8 @@ using System;
 
 namespace Accounting.Application.Domain
 {
-    public class DTOBase
+    public class DtoBase
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.Empty;
     }
 }

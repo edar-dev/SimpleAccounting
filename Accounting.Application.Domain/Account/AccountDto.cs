@@ -3,9 +3,15 @@ using System;
 
 namespace Accounting.Application.Domain.Account
 {
-    public class AccountDto : DTOBase
+    public class AccountDto : DtoBase
     {
-        public AccountDto(string name, int number, AccountType type, Guid? parentAccountId)
+        public AccountDto(string name, int number, AccountType type, AccountDto parentAccountDto) : this(name, number,
+            type, parentAccountDto.Id)
+        {
+            ParentParentAccount = parentAccountDto;
+        }
+
+        public AccountDto(string name, int number, AccountType type, Guid? parentAccountId = null)
         {
             Name = name;
             Number = number;
@@ -21,8 +27,10 @@ namespace Accounting.Application.Domain.Account
 
         public Guid? ParentAccountId { get; set; }
 
-        public AccountDto? ParentAccount { get; set; }
+        public AccountDto? ParentParentAccount { get; set; }
 
-        public string FullNumber => ParentAccount is not null ? string.Concat(ParentAccount.FullNumber, ".", Number) : Number.ToString();
+        public string FullNumber => ParentParentAccount is not null
+            ? string.Concat(ParentParentAccount.FullNumber, ".", Number)
+            : Number.ToString();
     }
 }

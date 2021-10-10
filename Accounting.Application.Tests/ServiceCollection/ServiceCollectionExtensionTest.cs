@@ -76,6 +76,7 @@ namespace Accounting.Application.Tests.ServiceCollection
             var services = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
             
             services.AddSingleton(new Mock<IAccountRepository>().Object);
+            services.AddSingleton(new Mock<IAccountTemplateRepository>().Object);
 
             var mappingConfig = new MapperConfiguration(mc => {});
             services.AddScoped<IMapper>(serviceProvider => new Mapper(mappingConfig));

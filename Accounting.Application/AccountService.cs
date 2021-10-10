@@ -9,11 +9,15 @@ namespace Accounting.Application
     public class AccountService : IAccountService
     {
         private readonly IAccountRepository _accountRepository;
+        private readonly IAccountTemplateRepository _accountTemplateRepository;
         private readonly IMapper _mapper;
 
-        public AccountService(IAccountRepository accountRepository, IMapper mapper)
+        public AccountService(IAccountRepository accountRepository,
+            IAccountTemplateRepository accountTemplateRepository,
+            IMapper mapper)
         {
             _accountRepository = accountRepository ?? throw new ArgumentNullException(nameof(accountRepository));
+            _accountTemplateRepository = accountTemplateRepository ?? throw new ArgumentNullException(nameof(accountTemplateRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -21,8 +25,22 @@ namespace Accounting.Application
         {
             var accountToCreate = _mapper.Map<Account>(createAccountDto);
             var account = _accountRepository.Create(accountToCreate);
-            
+
             return Get(account.Id);
+        }
+
+        public ChartOfAccountTemplateDto CreateAccountTemplate(ChartOfAccountTemplateDto newChartOfAccountTemplate)
+        {
+            var chartOfAccountTemplateToCreate = _mapper.Map<ChartOfAccountTemplate>(newChartOfAccountTemplate);
+
+            Guid chartOfAccountTemplateId = _accountTemplateRepository.Create(chartOfAccountTemplateToCreate);
+
+            return GetChartOfAccountTemplate(chartOfAccountTemplateId);
+        }
+
+        private ChartOfAccountTemplateDto GetChartOfAccountTemplate(Guid chartOfAccountTemplateId)
+        {
+            throw new NotImplementedException();
         }
 
         private AccountDto Get(Guid accountId)
@@ -40,7 +58,7 @@ namespace Accounting.Application
         {
             if (accountDto.ParentAccountId.HasValue)
             {
-                accountDto.ParentAccount = Get(accountDto.ParentAccountId.Value);
+                accountDto.ParentParentAccount = Get(accountDto.ParentAccountId.Value);
             }
         }
     }
