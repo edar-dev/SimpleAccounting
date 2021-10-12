@@ -11,6 +11,10 @@ namespace Accounting.Application.MappingProfileApplication
             CreateMap<CreateAccountDto, Account>();
             
             CreateMap<Account,AccountDto>();
+            
+            CreateMap<ChartOfAccountTemplateDto,ChartOfAccountTemplate>().ReverseMap();
+            
+            CreateMap<AccountTemplateDto,AccountTemplate>().ReverseMap();
         }
     }
 }

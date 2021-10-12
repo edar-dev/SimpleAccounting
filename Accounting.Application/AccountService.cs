@@ -40,7 +40,9 @@ namespace Accounting.Application
 
         private ChartOfAccountTemplateDto GetChartOfAccountTemplate(Guid chartOfAccountTemplateId)
         {
-            throw new NotImplementedException();
+            var template =  _accountTemplateRepository.Get(chartOfAccountTemplateId);
+
+            return _mapper.Map<ChartOfAccountTemplateDto>(template);
         }
 
         private AccountDto Get(Guid accountId)
