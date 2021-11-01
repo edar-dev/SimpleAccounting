@@ -1,6 +1,7 @@
 using System;
 using Accounting.Application.Domain.Company;
 using Accounting.Application.MappingProfileApplication;
+using Accounting.Application.Services;
 using Accounting.Persistence;
 using Accounting.Persistence.RedoDb;
 using AutoMapper;

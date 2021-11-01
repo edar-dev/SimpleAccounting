@@ -4,7 +4,7 @@ using Accounting.Persistence;
 using Accounting.Persistence.Entity;
 using AutoMapper;
 
-namespace Accounting.Application
+namespace Accounting.Application.Services
 {
     public class CompanyService : ICompanyService
     {

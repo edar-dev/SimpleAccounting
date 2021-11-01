@@ -17,7 +17,7 @@ namespace Accounting.Persistence.RedoDb
         {
             chartOfAccountTemplate.Id = _redoableGuid?.New() ?? Guid.NewGuid();
 
-            AssignId(chartOfAccountTemplate.ChartOfAccounts);
+            AssignId(chartOfAccountTemplate.Accounts);
 
             _chartOfAccountTemplates.Add(chartOfAccountTemplate);
 

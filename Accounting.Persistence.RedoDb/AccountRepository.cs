@@ -2,38 +2,55 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Accounting.Persistence.Entity;
+using Accounting.Persistence.Exceptions;
 using BoCode.RedoDB.RedoableData;
 
 namespace Accounting.Persistence.RedoDb
 {
-    public class AccountRepository : IAccountRepository, IDependsOnRedoableGuid
+    public class AccountRepository : RedoDbRepositoryBase, IAccountRepository, IDependsOnRedoableGuid
     {
-        private ICollection<Account> _accounts = new List<Account>();
-        private IRedoableGuid? _redoableGuid;
+        private readonly ICollection<ChartOfAccounts> _chartOfAccounts = new List<ChartOfAccounts>();
 
-        public Account Create(Account account)
+        public Guid SaveChartOfAccount(ChartOfAccounts coa)
         {
-            if (account.ParentAccountId.HasValue && !_accounts.Any(a => a.Id == account.ParentAccountId.Value))
+            coa.Id = GetReduableGuid();
+
+            foreach (var account in coa.Accounts)
             {
-                throw new InvalidOperationException(
-                    $"Impossible to create the account {account.Name} because the parent account {account.ParentAccountId.Value} does not exists");
+                SetAccountIdentityRecursively(account);
             }
-            
-            account.Id = _redoableGuid?.New() ?? Guid.NewGuid();
-            
-            _accounts.Add(account);
+            _chartOfAccounts.Add(coa);
 
-            return account;
+            return coa.Id;
         }
 
-        public Account Get(Guid accountId)
+        public ChartOfAccounts GetChartOfAccount(Guid chartOfAccountId)
         {
-            return _accounts.Single(a => a.Id == accountId);
+            try
+            {
+                var coa =  _chartOfAccounts.SingleOrDefault(coa => coa.Id == chartOfAccountId);
+
+                if (coa is null)
+                {
+                    throw new EntityNotFoundException(nameof(ChartOfAccounts),chartOfAccountId);    
+                }
+
+                return coa;
+            }
+            catch (InvalidOperationException e)
+            {
+                throw new DuplicatedEntityException(nameof(ChartOfAccounts),chartOfAccountId,e);
+            }
         }
 
-        public void SetRedoableGuid(IRedoableGuid redoableGuid)
+        private void SetAccountIdentityRecursively(Account account)
         {
-            _redoableGuid = redoableGuid;
+            account.Id = GetReduableGuid();
+            
+            foreach (var childrenAccount in account.ChildrenAccounts)
+            {
+                SetAccountIdentityRecursively(childrenAccount);
+            }
         }
     }
 }

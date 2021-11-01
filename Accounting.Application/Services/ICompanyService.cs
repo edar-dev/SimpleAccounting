@@ -1,6 +1,6 @@
 using Accounting.Application.Domain.Company;
 
-namespace Accounting.Application
+namespace Accounting.Application.Services
 {
     public interface ICompanyService
     {

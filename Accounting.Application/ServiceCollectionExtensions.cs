@@ -1,3 +1,4 @@
+using Accounting.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Accounting.Application
@@ -8,6 +9,7 @@ namespace Accounting.Application
         {
             services.AddTransient<ICompanyService, CompanyService>();
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IAccountTemplateService, AccountTemplateService>();
         }
     }
 }

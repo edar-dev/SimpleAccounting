@@ -1,36 +1,26 @@
 #nullable enable
-using System;
+using System.Collections.Generic;
 
 namespace Accounting.Application.Domain.Account
 {
     public class AccountDto : DtoBase
     {
-        public AccountDto(string name, int number, AccountType type, AccountDto parentAccountDto) : this(name, number,
-            type, parentAccountDto.Id)
-        {
-            ParentParentAccount = parentAccountDto;
-        }
-
-        public AccountDto(string name, int number, AccountType type, Guid? parentAccountId = null)
+        public AccountDto(string name, int number, AccountType accountType,
+            IEnumerable<AccountDto> childrenAccounts)
         {
             Name = name;
             Number = number;
-            Type = type;
-            ParentAccountId = parentAccountId;
+            AccountType = accountType;
+            ChildrenAccounts = childrenAccounts;
         }
 
-        public string Name { get; set; }
+        public string Name { get; }
 
-        public int Number { get; set; }
+        public int Number { get; }
 
-        public AccountType Type { get; set; }
+        public AccountType AccountType { get; }
 
-        public Guid? ParentAccountId { get; set; }
+        public IEnumerable<AccountDto> ChildrenAccounts { get; }
 
-        public AccountDto? ParentParentAccount { get; set; }
-
-        public string FullNumber => ParentParentAccount is not null
-            ? string.Concat(ParentParentAccount.FullNumber, ".", Number)
-            : Number.ToString();
     }
 }

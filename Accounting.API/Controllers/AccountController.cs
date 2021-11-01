@@ -3,6 +3,7 @@ using Accounting.API.Common;
 using Accounting.API.ViewModels;
 using Accounting.Application;
 using Accounting.Application.Domain.Account;
+using Accounting.Application.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,17 +20,6 @@ namespace Accounting.API.Controllers
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService));
-        }
-        
-        [HttpPost]
-        [RateLimitDecorator(StrategyType = StrategyTypeEnum.IpAddress)]
-        public ActionResult<AccountDto> Create(CreateAccountViewModel createAccountViewModel)
-        {
-
-            var createAccountDto = _mapper.Map<CreateAccountDto>(createAccountViewModel);
-
-            var createdAccount = _accountService.Create(createAccountDto);
-            return Ok(createdAccount);
         }
     }
 }

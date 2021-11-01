@@ -1,23 +1,23 @@
-using System;
+using System.Collections.Generic;
 
 namespace Accounting.Persistence.Entity
 {
-    public class Account: EntityBase
+    public class Account : EntityBase
     {
-        public Account(string name, int number, AccountType type, Guid? parentAccountId)
+        public Account(string name, int number, AccountType accountType,
+            IEnumerable<Account> childrenAccounts)
         {
             Name = name;
             Number = number;
-            Type = type;
-            ParentAccountId = parentAccountId;
+            AccountType = accountType;
+            ChildrenAccounts = childrenAccounts;
         }
 
-        public string Name { get; set; }
+        public string Name { get; }
 
-        public int Number { get; set; }
+        public int Number { get; }
 
-        public AccountType Type { get; set; }
-
-        public Guid? ParentAccountId { get; set; }
+        public AccountType AccountType { get; }
+        public IEnumerable<Account> ChildrenAccounts { get; }
     }
 }

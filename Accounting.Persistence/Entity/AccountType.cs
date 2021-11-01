@@ -2,7 +2,8 @@ namespace Accounting.Persistence.Entity
 {
     public enum AccountType
     {
-        Debit = 0,
-        Credit = 1
+        None = 0,
+        Debit = 1,
+        Credit = 2
     }
 }

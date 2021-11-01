@@ -5,8 +5,7 @@ namespace Accounting.Persistence
 {
     public interface IAccountRepository
     {
-        Account Create(Account account);
-        
-        Account Get(Guid accountId);
+        Guid SaveChartOfAccount(ChartOfAccounts coa);
+        ChartOfAccounts GetChartOfAccount(Guid chartOfAccountId);
     }
 }
