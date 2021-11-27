@@ -1,3 +1,4 @@
+using System;
 using Accounting.Persistence.Entity;
 
 namespace Accounting.Persistence
@@ -6,5 +7,8 @@ namespace Accounting.Persistence
     {
         AccountPlanItem Create(AccountPlanItem company);
 
+        AccountPlanItem GetById(Guid accountPlanId);
+        
+        bool Exists(Guid accountPlanId);
     }
 }
