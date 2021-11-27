@@ -8,8 +8,7 @@ namespace Accounting.Application
         public static void ConfigureApplicationService(this IServiceCollection services)
         {
             services.AddTransient<ICompanyService, CompanyService>();
-            services.AddTransient<IAccountService, AccountService>();
-            services.AddTransient<IAccountTemplateService, AccountTemplateService>();
+            services.AddTransient<IAccountPlanService, AccountPlanService>();
         }
     }
 }

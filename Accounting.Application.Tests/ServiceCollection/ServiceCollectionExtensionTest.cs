@@ -33,18 +33,18 @@ namespace Accounting.Application.Tests.ServiceCollection
         }
         
         [Fact]
-        public void RedoDbServiceCollectionExtensionsTestAccountRepository()
+        public void RedoDbServiceCollectionExtensionsTestAccountPlanItemRepository()
         {
             // SETUP
             var services = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
-
+            
             services.ConfigurePersistenceService();
-
+            
             var provider = services.BuildServiceProvider();
-
+            
             // ACT
-            var accountRepository = provider.GetRequiredService<IAccountRepository>();
-
+            var accountRepository = provider.GetRequiredService<IAccountPlanItemRepository>();
+            
             //ASSERT
             accountRepository.Should().NotBeNull();
         }
@@ -76,18 +76,17 @@ namespace Accounting.Application.Tests.ServiceCollection
             // SETUP
             var services = new Microsoft.Extensions.DependencyInjection.ServiceCollection();
             
-            services.AddSingleton(new Mock<IAccountRepository>().Object);
-            services.AddSingleton(new Mock<IAccountTemplateRepository>().Object);
-
+            services.AddSingleton(new Mock<IAccountPlanItemRepository>().Object);
+            
             var mappingConfig = new MapperConfiguration(mc => {});
-            services.AddScoped<IMapper>(serviceProvider => new Mapper(mappingConfig));
+            services.AddScoped<IMapper>(_ => new Mapper(mappingConfig));
             services.ConfigureApplicationService();
-
+            
             var provider = services.BuildServiceProvider();
-
+            
             // ACT
-            var accountService = provider.GetRequiredService<IAccountService>();
-
+            var accountService = provider.GetRequiredService<IAccountPlanService>();
+            
             //ASSERT
             accountService.Should().NotBeNull();
         }
@@ -109,7 +108,6 @@ namespace Accounting.Application.Tests.ServiceCollection
             
             //ASSERT
             serviceProvider.GetService<ICompanyService>().Should().NotBeNull();
-            serviceProvider.GetService<IAccountService>().Should().NotBeNull();
 
             target.Configuration.Should().Be(configurationStub.Object);
 
